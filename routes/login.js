@@ -15,17 +15,16 @@ router.post('/', async (req, res, next) => {
       url: 'https://dev.cormind.com/panel/login',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Cookie:
-          'panel=s%3Aw2Tq_UO92YTTBye-qJoozbPzmx5fTezY.5pUFTxTnvh859foBiL0BWdIusr0EA19ONGp5LsNHNUQ',
       },
       data: data,
     };
 
     const response = await axios(config);
 
-    const result = response.config.headers.Cookie; // response.data;
+    // console.log('cookie', response.headers['set-cookie'][0].split(';')[0]);
 
-    // console.log(response.config.headers.Cookie);
+    const result = response.headers['set-cookie'][0].split(';')[0]; // response.data;
+
     res.send(result);
   } catch (error) {
     next({ code: 500, message: error.message });
